@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{48F404E7-0AA1-43F8-8C8A-7D707BD5D3FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiService1", "src\DaprApiService1\ApiService1.csproj", "{3ADFD61D-D722-4BB9-944C-89775F1E1AA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiService2", "src\DaprApiService2\ApiService2.csproj", "{7BD72997-7843-4F08-A254-CFA5F579E392}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaprCounter", "src\DaprCounter\DaprCounter.csproj", "{F4B3A4DC-4A3A-4852-A285-F4BB4B641CDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3ADFD61D-D722-4BB9-944C-89775F1E1AA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ADFD61D-D722-4BB9-944C-89775F1E1AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ADFD61D-D722-4BB9-944C-89775F1E1AA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ADFD61D-D722-4BB9-944C-89775F1E1AA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BD72997-7843-4F08-A254-CFA5F579E392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BD72997-7843-4F08-A254-CFA5F579E392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BD72997-7843-4F08-A254-CFA5F579E392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BD72997-7843-4F08-A254-CFA5F579E392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4B3A4DC-4A3A-4852-A285-F4BB4B641CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4B3A4DC-4A3A-4852-A285-F4BB4B641CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4B3A4DC-4A3A-4852-A285-F4BB4B641CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4B3A4DC-4A3A-4852-A285-F4BB4B641CDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3ADFD61D-D722-4BB9-944C-89775F1E1AA3} = {48F404E7-0AA1-43F8-8C8A-7D707BD5D3FB}
+		{7BD72997-7843-4F08-A254-CFA5F579E392} = {48F404E7-0AA1-43F8-8C8A-7D707BD5D3FB}
+		{F4B3A4DC-4A3A-4852-A285-F4BB4B641CDA} = {48F404E7-0AA1-43F8-8C8A-7D707BD5D3FB}
+	EndGlobalSection
+EndGlobal
