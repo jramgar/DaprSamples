@@ -1,0 +1,16 @@
+# apiVersion: dapr.io/v1alpha1
+# kind: Component
+# metadata:
+#   name: bindings-twitter
+# spec:
+#   type: bindings.twitter
+#   version: v1
+#   metadata:
+#   - name: consumerKey
+#     value: "7cSuzo3oOAnCkK8FO0RCHWMPD" # twitter api consumer key, required
+#   - name: consumerSecret
+#     value: "l7Yvouw7h4nlFNGOxt657d2BTTkt3XrM7NuNOvG89rG5FC2mGu" # twitter api consumer secret, required
+#   - name: accessToken
+#     value: "249332521-ZNKnx0ltT9jLSL4bHmiW0PcDDSVE28buEuU8Nqth" # twitter api access token, required
+#   - name: accessSecret
+#     value: "4h4WPC2dKhpwxr6R4BoVozIXkCrybkWZuw93oOoTHzwFv" # twitter api access secret, required

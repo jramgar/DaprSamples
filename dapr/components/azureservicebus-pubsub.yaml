@@ -1,0 +1,18 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: servicebus-pubsub
+  namespace: default
+spec:
+  type: pubsub.azure.servicebus
+  version: v1
+  metadata:
+  - name: connectionString
+    # value: "Endpoint=sb://demodapr.servicebus.windows.net/;SharedAccessKeyName=demodapr;SharedAccessKey=utbrmxJvWjlXQkzI2Gv19l7Gk3LcPaLFurfcAodpXEs=;EntityPath=queue1"
+    # value: "Endpoint=sb://demodapr.servicebus.windows.net/;SharedAccessKeyName=dapr;SharedAccessKey=QTkOXC7qs3GjxrpIvnNUFK0NarnN4b2Ks1jOqiwqiHI=;EntityPath=topic1"
+    # value: "Endpoint=sb://demodapr.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=q5vDTmE/uec7hHMjvU7DxR+VbpYCoEoQaytaoJp3VHg="
+    secretKeyRef:
+      name: serviceBusConnectionString
+      key:  serviceBusConnectionString    
+auth:
+  secretStore: localsecretstore

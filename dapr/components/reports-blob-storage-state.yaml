@@ -1,0 +1,14 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: reports-blobstorage-state
+spec:
+  type: state.azure.blobstorage
+  version: v1
+  metadata:
+  - name: accountName
+    value: "demodaprcrd"
+  - name: accountKey
+    value: "demodaprcrd"
+  - name: containerName
+    value: "reports"

@@ -1,0 +1,56 @@
+version: '3.4'
+
+services:
+  myfrontend:
+    image: ${DOCKER_REGISTRY-}myfrontend
+    build:
+      context: .
+      dockerfile: MyFrontEnd/Dockerfile
+    ports:
+      - "53000:50001"
+
+  myfrontend-dapr:
+    image: "daprio/daprd:latest"
+    command: [ "./daprd", "-app-id", "MyFrontEnd", "-app-port", "80" ]
+    depends_on:
+      - myfrontend
+    network_mode: "service:myfrontend"
+    volumes:
+      - "./dapr/components/:/components"
+      - "./dapr/configuration/:/configuration"
+
+  mybackend:
+    image: ${DOCKER_REGISTRY-}mybackend
+    build:
+      context: .
+      dockerfile: MyBackEnd/Dockerfile
+    ports:
+      - "54000:50001"
+
+  mybackend-dapr:
+    image: "daprio/daprd:latest"
+    command: [ "./daprd", "-app-id", "MyBackEnd", "-app-port", "80" ]
+    depends_on:
+      - mybackend
+    network_mode: "service:mybackend"
+    volumes:
+      - "./dapr/components/:/components"
+      - "./dapr/configuration/:/configuration"
+
+  mybackend2:
+    image: ${DOCKER_REGISTRY-}mybackend2
+    build:
+      context: .
+      dockerfile: MyBackend2/Dockerfile
+    ports:
+      - "54001:50001"
+
+  mybackend2-dapr:
+    image: "daprio/daprd:latest"
+    command: [ "./daprd", "-app-id", "MyBackEnd2", "-app-port", "80" ]
+    depends_on:
+      - mybackend2
+    network_mode: "service:mybackend2"
+    volumes:
+      - "./dapr/components/:/components"
+      - "./dapr/configuration/:/configuration"
