@@ -1,56 +1,99 @@
 version: '3.4'
 
 services:
+
+  ############################################
+  ## Frontend App + Dapr 
+  ############################################
+
   myfrontend:
-    image: ${DOCKER_REGISTRY-}myfrontend
-    build:
+    #image: ${DOCKER_REGISTRY-}myfrontend
+    build: 
       context: .
-      dockerfile: MyFrontEnd/Dockerfile
+      dockerfile: MyFrontEnd/Dockerfile    
     ports:
-      - "53000:50001"
+      - "50001:50001"
+    depends_on:
+      - placement
+      - mybackend
+    networks:
+      - sample-network
 
   myfrontend-dapr:
     image: "daprio/daprd:latest"
-    command: [ "./daprd", "-app-id", "MyFrontEnd", "-app-port", "80" ]
+    command: [ "./daprd", 
+        "-app-id", "myfrontend", 
+        "-app-port","80",
+        "-app-ssl",        
+        "-placement-host-address", "placement:50006",
+        #"-dapr-grpc-port", "50002",
+        "-components-path", "/components"]
     depends_on:
       - myfrontend
     network_mode: "service:myfrontend"
     volumes:
       - "./dapr/components/:/components"
       - "./dapr/configuration/:/configuration"
+      - "./dapr/secrets/:/secrets"
+
+  ############################################
+  ## Backend App + Dapr 
+  ############################################
 
   mybackend:
-    image: ${DOCKER_REGISTRY-}mybackend
-    build:
+    #image: ${DOCKER_REGISTRY-}mybackend
+    build: 
       context: .
-      dockerfile: MyBackEnd/Dockerfile
-    ports:
-      - "54000:50001"
+      dockerfile: MyBackEnd/Dockerfile        
+    depends_on:
+      - placement
+    networks:
+      - sample-network
 
   mybackend-dapr:
     image: "daprio/daprd:latest"
-    command: [ "./daprd", "-app-id", "MyBackEnd", "-app-port", "80" ]
+    command: [ "./daprd", 
+        "-app-id", "mybackend",         
+        "-app-port", "80" ,
+        "-placement-host-address", "placement:50006",
+        #"-dapr-grpc-port", "50002",
+        "-components-path", "/components"]
     depends_on:
       - mybackend
     network_mode: "service:mybackend"
     volumes:
       - "./dapr/components/:/components"
       - "./dapr/configuration/:/configuration"
+      - "./dapr/secrets/:/secrets"
 
-  mybackend2:
-    image: ${DOCKER_REGISTRY-}mybackend2
-    build:
-      context: .
-      dockerfile: MyBackend2/Dockerfile
+  #mybackend2:
+  #  image: ${DOCKER_REGISTRY-}mybackend2
+  #  build:
+  #    context: .
+  #    dockerfile: MyBackend2/Dockerfile
+  #  ports:
+  #    - "54001:50001"
+
+  #mybackend2-dapr:
+  #  image: "daprio/daprd:latest"
+  #  command: [ "./daprd", "-app-id", "MyBackEnd2", "-app-port", "80" ]
+  #  depends_on:
+  #    - mybackend2
+  #  network_mode: "service:mybackend2"
+  #  volumes:
+  #    - "./dapr/components/:/components"
+  #    - "./dapr/configuration/:/configuration"
+
+  ############################
+  # Dapr placement 
+  ############################
+  placement:
+    image: "daprio/dapr"
+    command: ["./placement", "-port", "50006"]
     ports:
-      - "54001:50001"
+      - "50006:50006"
+    networks:
+      - sample-network
 
-  mybackend2-dapr:
-    image: "daprio/daprd:latest"
-    command: [ "./daprd", "-app-id", "MyBackEnd2", "-app-port", "80" ]
-    depends_on:
-      - mybackend2
-    network_mode: "service:mybackend2"
-    volumes:
-      - "./dapr/components/:/components"
-      - "./dapr/configuration/:/configuration"
+networks:
+    sample-network:
