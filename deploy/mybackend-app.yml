@@ -1,0 +1,36 @@
+kind: containerapp
+location: northeurope
+name: mybackend
+resourceGroup: DaprSamples
+type: Microsoft.App/containerApps
+tags:
+properties:
+  managedEnvironmentId: /subscriptions/44faf07a-6afd-461b-a664-3461a150f26e/resourceGroups/DaprSamples/providers/Microsoft.App/managedEnvironments/SampleEnv
+  configuration:
+    activeRevisionsMode: Single
+    secrets:
+      - name: myregistrypassword
+        value: "HUAYrAX5UbLwAn6p=eHRNWmQ48wswY8m"
+    registries:
+      - server: jramgar.azurecr.io
+        username: jramgar
+        passwordSecretRef: myregistrypassword
+    dapr:
+      appId: mybackend
+      appPort: 5196
+      appProtocol: http
+      enabled: true
+  template:
+    revisionSuffix: rev01
+    containers: 
+      - image: jramgar.azurecr.io/mybackend:latest        
+        name: mybackend
+        env:
+          - name: HTTP_PORT
+            value: 5196
+    resources:
+      cpu: 1
+      memory: 2Gi
+    scale:
+      minReplicas: 1
+      maxReplicas: 1

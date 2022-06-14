@@ -1,0 +1,45 @@
+kind: containerapp
+location: northeurope
+name: myfrontend
+resourceGroup: DaprSamples
+type: Microsoft.App/containerApps
+tags:
+properties:
+  managedEnvironmentId: /subscriptions/44faf07a-6afd-461b-a664-3461a150f26e/resourceGroups/DaprSamples/providers/Microsoft.App/managedEnvironments/SampleEnv
+  configuration:
+    activeRevisionsMode: Single
+    secrets:
+      - name: myregistrypassword
+        value: "HUAYrAX5UbLwAn6p=eHRNWmQ48wswY8m"
+    registries:
+      - server: jramgar.azurecr.io
+        username: jramgar
+        passwordSecretRef: myregistrypassword
+    ingress: 
+      external: true
+      allowInsecure: true
+      targetPort: 3000
+      traffic:
+        - latestRevision: true
+          weight: 100
+      transport: Auto
+    dapr:
+      appId: myfrontend
+      appPort: 3000
+      appProtocol: http
+      enabled: true
+
+  template:
+    revisionSuffix: rev01
+    containers:
+      - image: jramgar.azurecr.io/myfrontend:latest
+        name: myfrontend
+        env:
+          - name: HTTP_PORT
+            value: 3000
+        resources:
+          cpu: 1
+          memory: 2Gi
+    scale:
+      minReplicas: 1
+      maxReplicas: 1

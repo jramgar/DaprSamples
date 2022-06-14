@@ -33,7 +33,7 @@ services:
     network_mode: "service:myfrontend"
     volumes:
       - "./dapr/components/:/components"
-      - "./dapr/configuration/:/configuration"
+      #- "./dapr/configuration/:/configuration"
       - "./dapr/secrets/:/secrets"
 
   ############################################
